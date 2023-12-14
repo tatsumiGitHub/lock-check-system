@@ -31,7 +31,7 @@ void loop() {
   x = analogRead(3) - 510;
   y = analogRead(4) - 510;
   z = analogRead(5) - 540;
-  Serial.println("1001001," + String(x) + "," + String(y) + "," + String(z));
+  Serial.println("device_name," + String(x) + "," + String(y) + "," + String(z));
   if (50 < z) {
     digitalWrite(13, LOW);
   } else if (z < -50) {
