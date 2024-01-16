@@ -4,9 +4,32 @@ Arduino Unoや加速度センサなどの機器を使用することを前提と
 
 **本プログラムを用いて行う一切の行為，被った損害・損失に対しては，一切の責任を負いかねます**
 
+## ディレクトリ構成
+```
+.
+├── azure_functions
+│   ├── .vscode (省略)
+│   ├── .functionignore
+│   ├── .gitignore
+│   ├── host.json
+│   ├── requirements.txt
+│   └── app
+│       ├── app.dat
+│       ├── app.py
+│       └── function.json
+├── IoT-Device
+│   ├── .gitignore
+│   ├── IoT-Device.ino
+│   ├── IoT-Device.py
+│   └── requirements.txt
+├── .fig (省略)
+├── .gitignore
+└── README.md
+```
+
 ## 構成と設計
 
-### エッジ側の構成
+### IoTデバイス側の構成
 - USBケーブル Type A-B
 - Arduino Uno R3
 - Raspberry Pi 4B (4GB)
@@ -27,7 +50,7 @@ Arduino Unoや加速度センサなどの機器を使用することを前提と
 
 ### サーバ側の構成
 - Azure IoT Hub
-- Cosmos DB
+- Azure Cosmos DB
 - Azure Functions
     - Message API
 ### 全体の設計
@@ -39,9 +62,10 @@ Arduino Unoや加速度センサなどの機器を使用することを前提と
 - いらすとや, かわいいフリー素材集 いらすとや, https://www.irasutoya.com/, 2024/01/16 access
 
 ## ビルド
-
-### エッジ側
-Raspberry Piにて，以下の表に示す環境変数を設定してください．
+### Raspberry Pi
+シリアルポート通信が可能となるように，Arduino UnoとRaspberry Piを接続してください．
+#### 環境変数
+以下の表に示す環境変数を設定してください．
 |環境変数名|設定する内容|
 |-|-|
 |IOTHUB_DEVICE_NAME|Azure IoT HubのデバイスID|
@@ -50,7 +74,23 @@ Raspberry Piにて，以下の表に示す環境変数を設定してくださ�
 |COSMOS_DB_DATABASE_STRING|Cosmos DBのデータベースID|
 |COSMOS_DB_CONTAINER_STRING|Cosmos DBのコンテナID|
 
-### エッジ側
+#### Pythonパッケージ
+以下に示すPythonパッケージをインストールしてください．
+- pyserial
+- azure-cosmos
+- azure-iot-device
+
+### Azure IoT Hub
+各IoTデバイスに対応するIoTハブを作成してください．
+また，ハブ設定＞メッセージ ルーティングより，
+IoTデバイスから受け取ったメッセージがCosmos DBに転送されるように
+エンドポイントとルートを設定してください．
+
+### Azure Cosmos DB
+APIをコア(SQL)，容量モードをServerlessに設定した
+Azure Cosmos DBアカウントを作成してください．
+
+### Azure Functions
 Azure Functionsにて，以下の表に示す環境変数を設定してください．
 |環境変数名|設定する内容|
 |-|-|
