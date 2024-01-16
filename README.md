@@ -69,7 +69,8 @@ Arduino Unoや加速度センサなどの機器を使用することを前提と
 
 ## ビルド
 ### Arduinoの操作
-Arduino IDEで，[スケッチ](IoT-Device/IoT-Device.ino)の検証と書き込みを行ってください．
+[スケッチ (IoT-Device.ino)](IoT-Device/IoT-Device.ino)の21行目にある"device_name"の記述をIoTデバイス名に合わせて変更してください（例えば，"door"や"south window"など）．
+その後，Arduino IDEで[スケッチ](IoT-Device/IoT-Device.ino)の検証と書き込みを行ってください．
 ### Raspberry Pi
 シリアルポート通信が可能となるように，Arduino UnoとRaspberry Piを接続してください．
 [requirements.txt](IoT-Device/requirements.txt)から，[IoT-Device.py](IoT-Device/IoT-Device.py)の実行に必要なPythonパッケージをインストールしてください．
@@ -112,7 +113,11 @@ VScodeの拡張機能である**Azure Functions**をインストールしてく�
 
 ## 実行
 
-### データ送信プログラムの起動 (Raspberry Pi)
+### 加速度データを送信するプログラムの起動 (Raspberry Pi)
+以下の操作により，加速度に関するデータをAzure IoT Hubへ送信するプログラムを起動できます．
+```
+python3 IoT-Device.py
+```
 
 ### LINEの操作
 本アプリでは，Cosmos DBに登録されている施錠データをLINEのチャンネルから要求する場合，
