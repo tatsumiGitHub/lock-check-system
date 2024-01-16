@@ -70,7 +70,7 @@ Arduino Unoや加速度センサなどの機器を使用することを前提と
 ## ビルド
 ### Arduinoの操作
 [スケッチ (IoT-Device.ino)](IoT-Device/IoT-Device.ino)の21行目にある"device_name"の記述をIoTデバイス名に合わせて変更してください（例えば，"door"や"south window"など）．
-その後，Arduino IDEで[スケッチ](IoT-Device/IoT-Device.ino)の検証と書き込みを行ってください．
+その後，Arduino IDEでスケッチの検証と書き込みを行ってください．
 ### Raspberry Pi
 シリアルポート通信が可能となるように，Arduino UnoとRaspberry Piを接続してください．
 [requirements.txt](IoT-Device/requirements.txt)から，[IoT-Device.py](IoT-Device/IoT-Device.py)の実行に必要なPythonパッケージをインストールしてください．
